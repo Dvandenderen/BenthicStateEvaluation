@@ -110,7 +110,7 @@ oview <- rbind(oview,oview2)
 colnames(oview)[2:19] <- c("B","A","R","H'","SI","IS","Lm","Lf",
                            "SoS","AMBI","M-AMBI","BENTIX","Dm'","mTDI",
                            "TDI","pTDI","mT","DKI")
-oview <- oview[,c("region","R","B","A","Dm'","H'","SI","IS",
+oview <- oview[,c("region","B","A","R","Dm'","H'","SI","IS",
                   "AMBI","M-AMBI","BENTIX","DKI","TDI","mTDI","mT","Lm",
                   "pTDI","SoS","Lf")]
 
@@ -136,21 +136,27 @@ for(j in 1:17){
 tot <- cbind(tot,ind)
 colnames(tot) <- c("Region","Indicator","Effect")
 
+# create empty column
+empty <- subset(tot ,tot$Region == 1)
+empty$Region <- "18"
+empty$Effect <- 100
+tot <- rbind(tot,empty)
+      
 tot$Region <- factor(tot$Region, levels = unique(tot$Region))
 tot$Indicator <- factor(tot$Indicator, levels = rev(unique(tot$Indicator)))
-tot$Effect <- factor(tot$Effect, levels = c("-1","0","1","2","3","4"))
+tot$Effect <- factor(tot$Effect, levels = c("-1","0","1","2","3","4","100"))
 
 # set colors
-coldat <- data.frame(cat = as.factor(c(-1,0,1,2,3,4)), 
-                     col = c("#fcae91","white","#bdd7e7","#6baed6","#3182bd","#08519c"))
+#coldat <- data.frame(cat = as.factor(c(-1,0,1,2,3,4,100)), 
+#                     col = c("#fcae91","white","#bdd7e7","#6baed6","#3182bd","#08519c","pink"))
 
-tot <- cbind(tot, coldat[match(tot$Effect,coldat$cat), c(2)])
-colnames(tot)[ncol(tot)] <- "coll"
-tot$coll[is.na(tot$coll)] <- "grey"
+#tot <- cbind(tot, coldat[match(tot$Effect,coldat$cat), c(2)])
+#colnames(tot)[ncol(tot)] <- "coll"
+#tot$coll[is.na(tot$coll)] <- "grey"
   
-rankCV <- data.frame(region= c(1:17),
+rankCV <- data.frame(region= c(1:18),
                      rank = c(13,14,8,4,1,2,3,11,
-                              10,12,7,5,6,9,15,16,17))
+                              10,12,7,5,6,9,16,17,18,15))
 rankCV <- rankCV[order(rankCV$rank),] 
 
 
@@ -163,13 +169,14 @@ p <- ggplot(tot, aes(x = Gradient, y = Indicator)) +
                                                               "1" = "#9ecae1",
                                                               "2" ="#6baed6",
                                                               "3" = "#3182bd",
-                                                              "4" = "#08519c"),
+                                                              "4" = "#08519c",
+                                                              "100" = "white"),
                                                    na.value="#f0f0f0",
                                                    labels=c('increase', 'no effect',
                                                             '0-25% decline',"25-50% decline",
-                                                            "50-75% decline","75-100% decline"))+
+                                                            "50-75% decline","75-100% decline",""))+
   theme (legend.title=element_text(size=10),legend.position = "bottom",panel.background = element_blank())
-p <- p + scale_x_continuous(breaks=1:17,labels= rankCV$region)
+p <- p + scale_x_continuous(breaks=1:18,labels= c(rankCV$region[1:14],"",rankCV$region[16:18]))
 
 pdf("Output/Overview_all_gradients.pdf",width = 5,height = 5.5)   
 print(p)

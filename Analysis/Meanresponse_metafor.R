@@ -24,7 +24,7 @@ indicator_list <- c("B","A","R","H'","SI","IS","Lm","Lf","SoS","AMBI","M-AMBI",
 colnames(dat)[12:29] <- indicator_list
 
 # re-order the indicators
-indicator_reorder    <- c("R","B","A","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
+indicator_reorder    <- c("B","A","R","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
                           "TDI","mTDI","mT","Lm","pTDI","SoS","Lf")
 
 #-------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ indicator_list <- c("B","A","R","H'","SI","IS","Lm","Lf",
                       "TDI","pTDI","mT","DKI")
 colnames(dat)[12:29] <- indicator_list
   
-indicator_reorder <- c("R","B","A","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
+indicator_reorder <- c("B","A","R","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
                        "TDI","mTDI","mT","Lm","pTDI","SoS","Lf")
 
 #-------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ indicator_list <- c("B","A","R","H'","SI","IS","Lm","Lf",
                     "TDI","pTDI","mT","DKI")
 colnames(dat)[12:29] <- indicator_list
 
-indicator_reorder <- c("R","B","A","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
+indicator_reorder <- c("B","A","R","Dm'","H'","SI","IS","AMBI","M-AMBI","BENTIX","DKI",
                        "TDI","mTDI","mT","Lm","pTDI","SoS","Lf")
 
 #-------------------------------------------------------------------------------
